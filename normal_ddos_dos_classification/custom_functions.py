@@ -5,7 +5,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from sklearn import metrics
 import itertools
 
 dataframe_list = list()
@@ -14,11 +13,11 @@ def data_chunks_creater(df_unsw_normal,df_bot_dos,df_bot_ddos):
     
     #we are taking 10 chunks only but you can take maximum upto 20
     number_of_chunks = 10
-    data_limit = 80000*number_of_chunks
+    data_limit = 2*80000*number_of_chunks
     
     #chunk_start and chunk_end are used to partition chunks from the oversampled data
     chunk_start = 0
-    chunk_end = 80000
+    chunk_end = 2*80000
     
     #iterating so the chunks could be merged
     for _ in range(number_of_chunks):
@@ -42,7 +41,7 @@ def data_chunks_creater(df_unsw_normal,df_bot_dos,df_bot_ddos):
         
         #updating chunk_start and chunk_end value
         chunk_start = chunk_end
-        chunk_end = chunk_end+80000
+        chunk_end = chunk_end+80000*2
         
     return dataframe_list
 
@@ -61,6 +60,21 @@ def data_preprocessing(data):
         y = df['category']
         x_label_data.append(x)
         y_label_data.append(y)
+    return x_label_data,y_label_data
+
+def data_preprocessing_test(data):
+    x_label_data = list()
+    y_label_data = list()
+    df = data
+    df = shuffle(df)
+    df.reset_index(drop=True,inplace=True)
+    x = df.loc[:, df.columns != 'category']
+    #min_max
+    #x=(x-x.min())/(x.max()-x.min())
+    df.category = pd.factorize(df.category)[0]
+    y = df['category']
+    x_label_data.append(x)
+    y_label_data.append(y)
     return x_label_data,y_label_data
 
 def plot_confusion_matrix(cm, classes,
