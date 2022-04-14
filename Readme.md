@@ -8,8 +8,8 @@ Step1:-
 
 
 Step2:-
-1) Copy the cleaned_dataset  folder into normal_ddos_dos_classification
-2) Run data_cleaning_unsw.ipynb and data_cleaning_bot_iot.ipynb, to clean dataset
+1) Run data_cleaning_unsw.ipynb and data_cleaning_bot_iot.ipynb, to clean dataset
+2) Copy the cleaned_dataset  folder into normal_ddos_dos_classification 
 3) Run the training.ipynb, to train the model
 4) Run the test.ipynb, to test  the model
 
