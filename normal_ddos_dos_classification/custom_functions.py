@@ -70,7 +70,7 @@ def data_preprocessing_test(data):
     df.reset_index(drop=True,inplace=True)
     x = df.loc[:, df.columns != 'category']
     #min_max
-    #x=(x-x.min())/(x.max()-x.min())
+    x=(x-x.min())/(x.max()-x.min())
     df.category = pd.factorize(df.category)[0]
     y = df['category']
     x_label_data.append(x)
